@@ -3,11 +3,10 @@ require 'bookmark'
 describe Bookmark do
    describe '.all' do
      it 'returns all bookmarks in an array' do
-       connection = PG.connect(dbname: 'bookmark_manager_test')
-p "test"
-      connection.exec("INSERT INTO bookmarks VALUES(1, 'www.theguardian.com');")
-   		connection.exec("INSERT INTO bookmarks VALUES(2, 'www.repubblica.it');")
-   		connection.exec("INSERT INTO bookmarks VALUES(3, 'www.latercera.com');")
+
+      Bookmark.create(url: 'www.theguardian.com')
+   		Bookmark.create(url: 'www.repubblica.it')
+   		Bookmark.create(url: 'www.latercera.com')
 
       expected_bookmarks = [
         "www.theguardian.com",
@@ -16,6 +15,13 @@ p "test"
       ]
 
       expect(Bookmark.all).to eq expected_bookmarks
+    end
+  end
+
+  describe '.create' do
+    it 'creates new bookmark' do
+      Bookmark.create(url: 'www.elmostrador.cl')
+      expect(Bookmark.all).to include 'www.elmostrador.cl'
     end
   end
 end

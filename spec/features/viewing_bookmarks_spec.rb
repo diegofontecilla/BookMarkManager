@@ -1,12 +1,11 @@
-require 'pg'
+require 'bookmark'
 
-feature 'Viewing bookmarms' do
+feature 'Viewing bookmarks' do
 	scenario 'A user can see bookmarks' do
-		connection = PG.connect(dbname: 'bookmark_manager_test')
-p "test_test"
-		connection.exec("INSERT INTO bookmarks VALUES(1, 'www.theguardian.com');")
-		connection.exec("INSERT INTO bookmarks VALUES(2, 'www.repubblica.it');")
-		connection.exec("INSERT INTO bookmarks VALUES(3, 'www.latercera.com');")
+
+		Bookmark.create(url: 'www.theguardian.com')
+		Bookmark.create(url: 'www.repubblica.it')
+		Bookmark.create(url: 'www.latercera.com')
 
 		visit('/bookmark')
 
