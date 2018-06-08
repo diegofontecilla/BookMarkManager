@@ -1,7 +1,12 @@
 require 'sinatra/base'
 require './lib/bookmark'
+require 'uri'
+require 'sinatra'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
+	enable :sessions
+	register Sinatra::Flash
 
 	get '/' do
 		'Hello world'
@@ -12,12 +17,21 @@ class BookmarkManager < Sinatra::Base
 		erb :index
 	end
 
+	post '/bookmark' do
+		puts params['url']
+		redirect('/bookmark')
+	end
+
 	get '/bookmark/new' do
 		erb :"bookmark/new"
 	end
 
 	post '/bookmark/new' do
-		Bookmark.create(url: params['url'])
+		if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
+			Bookmark.create(url: params['url'])
+		else
+			flash[:notice] = 'You must submit a real url'
+		end
 		redirect '/bookmark'
 	end
 
