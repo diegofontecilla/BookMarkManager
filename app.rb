@@ -27,8 +27,7 @@ class BookmarkManager < Sinatra::Base
 	end
 
 	post '/bookmark/new' do
-		flash[:notice] = 'You must submit a real url'
-		Bookmark.create(url: params['url'])
+		flash[:notice] = 'You must submit a real url' unless Bookmark.create(url: params['url'])
 		redirect '/bookmark'
 	end
 
