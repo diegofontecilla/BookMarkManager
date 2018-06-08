@@ -4,14 +4,14 @@ describe Bookmark do
    describe '.all' do
      it 'returns all bookmarks in an array' do
 
-      Bookmark.create(url: 'www.theguardian.com')
-   		Bookmark.create(url: 'www.repubblica.it')
-   		Bookmark.create(url: 'www.latercera.com')
+      Bookmark.create(url: 'http://www.theguardian.com')
+   		Bookmark.create(url: 'http://www.repubblica.it')
+   		Bookmark.create(url: 'http://www.latercera.com')
 
       expected_bookmarks = [
-        "www.theguardian.com",
-        "www.repubblica.it",
-        "www.latercera.com"
+        "http://www.theguardian.com",
+        "http://www.repubblica.it",
+        "http://www.latercera.com"
       ]
 
       expect(Bookmark.all).to eq expected_bookmarks
@@ -20,8 +20,8 @@ describe Bookmark do
 
   describe '.create' do
     it 'creates new bookmark' do
-      Bookmark.create(url: 'www.elmostrador.cl')
-      expect(Bookmark.all).to include 'www.elmostrador.cl'
+      Bookmark.create(url: 'http://www.elmostrador.cl')
+      expect(Bookmark.all).to include 'http://www.elmostrador.cl'
     end
   end
 end

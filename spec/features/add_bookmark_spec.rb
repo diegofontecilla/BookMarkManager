@@ -14,5 +14,4 @@ feature 'adding a new bookmark' do
     expect(page).not_to have_content 'theguardian'
     expect(page).to have_content 'You must submit a real url'
   end
-
 end
